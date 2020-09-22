@@ -6,42 +6,46 @@ screen = pygame.display.set_mode([800,600])
 mouseDown = False
 keepGoing = True
 clock = pygame.time.Clock()
-picn = ["A", 2, 3, 4, 5, 6, 7, 8, 9 ,10, "J", "Q", "K"] #번호 저장 해놓기
-pics = ["♠", "◆", "♥", "♣"] #문양 저장 해놓기
+picn = pygame.image.load("card1.png") #번호 저장 해놓기
+pics = pygame.image.load("card14.png") #문양 저장 해놓기
 sprite_list = pygame.sprite.Group()
 
 class Card(pygame.sprite.Sprite):
-    def __init__(self,num,shape,posn,poss):
+    def __init__(self,picture,pos):
         pygame.sprite.Sprite.__init__(self)
-        self.num = num 
-        self.shape = shape
-        #self.number = self.num.get_rect() #좌표 저장하는 곳 만들기
-        #self.picture = self.shape() #좌표 저장하는 곳 만들기 2
-        self.pos1 = posn 
-        self.pos2 = poss
+        self.p = picture 
+        self.pic = self.p.get_rect() #  n is string,  문자열은 rect 가 존재하나? 
+        self.pos = pos
         #좌표 저장하기
-        '''self.num.x = pos1[0] 
-        self.num.y = pos1[1]
-        self.shape.x = pos2[0]
-        self.shape.y = pos2[1]'''
+        self.pic.x = self.pos[0] 
+        self.pic.y = self.pos[1]
 
-    def update(self):++
+    def update(self):
         pass
 
 nx = 0
 ny = 0
 ix = 0
 iy = 0
+i = 0
+n = 0
 
-for n in range(0,13):
-    for i in range(0,4):
+N = Card(picn, (50, 50))
+sprite_list.add(N)
+
+S = Card(pics, (100,100))
+sprite_list.add(S)
+
+'''for i in range(0,4):
+    for n in range(0,13):
         C = Card(picn[n], pics[i],(nx,ny),(ix,iy)) #객체 만들기
         sprite_list.add(C)
 
-        ix += 
-        iy += 1
-        nx += 1
-        ny += 1
+        ix += 31
+        nx += 31
+
+    iy += 150
+    nx += 150'''
 
 while keepGoing:
     for event in pygame.event.get():
@@ -50,11 +54,17 @@ while keepGoing:
 
     #카드 그리기
     screen.fill(BLACK)
-    sprite_list.update()
+  
     sprite_list.draw(screen)
+    sprite_list.update()
+    
 
     clock.tick(60)
     pygame.display.update()
+
+    i += 1
+    n += 1
+    
 pygame.quit()
 #2 ** 5 * 5 ** 2
 #카드 배치 13 * 4
