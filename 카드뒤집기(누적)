@@ -197,7 +197,6 @@ while keepGoing:
 
         bnlist.append(bn)
         bnlist.reverse()
-        print(bn)
         
         r = 0
         c = 0
